@@ -28,6 +28,44 @@ Next.js has some PROS.
 
 6. Cutomizable Babel and Webpack.
 
+## Dependencies
+
+- `next`: React with Server Side Rendering.
+
+- `react, react-dom`
+
+- `styled-components`
+
+  - `babel-plugin-styled-components`: Support styled-components with Nextjs.
+
+  - and create .babelrc in root path.
+
+    ```
+    {
+      "presets": ["next/babel"],
+      "plugins": [["styled-components", { "ssr": true }]]
+    }
+
+    ```
+
+  - ref: https://github.com/zeit/next.js/tree/master/examples/with-styled-components
+
+- `eslint`
+
+  - `eslint-config-airbnb`
+
+  - `eslint-plugin-babel, eslint-plugin-import, eslint-plugin-jsx-a11y, eslint-plugin-react`
+
+## Script
+
+```
+scripts: {
+  "dev": "next",
+  "build": "next build",
+  "start": "next start"
+}
+```
+
 # License
 
 MIT
