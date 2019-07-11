@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import colors from '../../styles/colors';
 
@@ -35,12 +36,20 @@ const Menu = styled.li`
 
 const Header = () => (
   <Wrapper>
-    <Title>RealWorld</Title>
+    <Link href="/">
+      <Title>RealWorld</Title>
+    </Link>
     <nav>
       <Menulist>
-        <Menu>Home</Menu>
-        <Menu>Sign in</Menu>
-        <Menu>Sign up</Menu>
+        <Link href="/">
+          <Menu>Home</Menu>
+        </Link>
+        <Link href="/signin">
+          <Menu>Sign in</Menu>
+        </Link>
+        <Link href="/signup">
+          <Menu>Sign up</Menu>
+        </Link>
       </Menulist>
     </nav>
   </Wrapper>
