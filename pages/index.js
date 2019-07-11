@@ -1,5 +1,39 @@
 import React from 'react';
+import styled from 'styled-components';
+import colors from '../styles/colors';
 
-const Index = () => <p>Hello Next.js</p>;
+import Layout from '../components/common/Layout';
+import Header from '../components/common/Header';
+
+import '../styles/common.css';
+
+const MainSection = styled.section`
+  height: 10.625rem;
+  background-color: ${colors.blue9};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  color: ${colors.gray0};
+  font-size: 1.875rem;
+`;
+
+const SubTitle = styled.h3`
+  color: ${colors.gray0};
+  font-size: 1rem;
+`;
+
+const Index = () => (
+  <Layout>
+    <Header />
+    <MainSection>
+      <Title>Welcome to RealWorld</Title>
+      <SubTitle>Personal Project made by Next.js</SubTitle>
+    </MainSection>
+  </Layout>
+);
 
 export default Index;

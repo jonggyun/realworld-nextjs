@@ -66,6 +66,32 @@ scripts: {
 }
 ```
 
+## Description
+
+### How to use Styled-components
+
+ref: https://github.com/zeit/next.js/tree/canary/examples/with-styled-components
+
+```
+  npm install styled-components
+```
+
+Note🚨
+
+Create \_app.js and \_document.js files to use styled-components with SSR.
+
+### How to use Css with Next.js
+
+ref: https://github.com/zeit/next-plugins/tree/master/packages/next-css
+
+```
+  npm install --save @zeit/next-css
+```
+
+Note🚨
+
+Css files cannot be import `_documnet.js`.
+
 # License
 
 MIT

@@ -4,9 +4,12 @@
   "description": "This project use [Realword API](https://github.com/gothinkster/realworld) and [Next.js](https://nextjs.org/).",
   "main": "index.js",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "babel-plugin-styled-components": "^1.10.6",
     "next": "^9.0.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
