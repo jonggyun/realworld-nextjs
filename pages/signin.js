@@ -6,6 +6,7 @@ import colors from '../styles/colors';
 import Layout from '../components/common/Layout';
 import Header from '../components/common/Header';
 import SignInForm from '../components/SignInForm';
+import ButtonForm from '../components/ButtonForm';
 
 const Section = styled.section`
   margin-top: 1.875rem;
@@ -27,6 +28,12 @@ const Account = styled.span`
   }
 `;
 
+const FormSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 const login = () => (
   <Layout title="Sign in">
     <Header />
@@ -35,8 +42,11 @@ const login = () => (
       <Link href="/signup">
         <Account>Need an account?</Account>
       </Link>
-      <SignInForm name="email" placeholder="Email" />
-      <SignInForm name="password" placeholder="Password" />
+      <FormSection>
+        <SignInForm name="email" placeholder="Email" />
+        <SignInForm name="password" placeholder="Password" />
+        <ButtonForm title="Sign In" />
+      </FormSection>
     </Section>
   </Layout>
 );

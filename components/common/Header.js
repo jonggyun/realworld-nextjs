@@ -15,6 +15,9 @@ const Title = styled.h1`
   font-size: 1.25rem;
   font-weight: 800;
   color: ${colors.blue7};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Menulist = styled.ul`

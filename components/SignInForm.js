@@ -11,7 +11,7 @@ const Input = styled.input`
   font-size: 1rem;
   border-radius: 0.3rem;
   border: 1px solid ${colors.gray3};
-  margin-top: 1.25rem;
+  margin: 0.625rem 0;
 
   ::placeholder {
     color: ${colors.gray5};
@@ -25,9 +25,10 @@ const SignInForm = ({ placeholder = 'placeholder', name = 'name' }) => {
     <Input
       type={name === 'password' ? 'password' : 'text'}
       name={name}
-      value={state[name]}
+      value={state ? state[name] : ''}
       onChange={handleOnChange}
       placeholder={placeholder}
+      autoComplete="off"
     />
   );
 };
