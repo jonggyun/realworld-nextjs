@@ -5,8 +5,6 @@ import colors from '../styles/colors';
 import Layout from '../components/common/Layout';
 import Header from '../components/common/Header';
 
-import '../styles/common.css';
-
 const MainSection = styled.section`
   height: 10.625rem;
   background-color: ${colors.blue9};

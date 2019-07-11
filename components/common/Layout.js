@@ -5,6 +5,8 @@ const Wrapper = styled.div`
   max-width: 62.5rem;
   margin-left: auto;
   margin-right: auto;
+
+  font-family: Roboto;
 `;
 
 const Container = styled.section``;
