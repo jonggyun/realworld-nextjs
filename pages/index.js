@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
-import Layout from '../components/common/Layout';
-import Header from '../components/common/Header';
+import Layout from '../components/Layout';
+import Header from '../components/Header';
 
 const MainSection = styled.section`
   height: 10.625rem;

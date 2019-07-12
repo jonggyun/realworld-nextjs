@@ -3,8 +3,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
-import Layout from '../components/common/Layout';
-import Header from '../components/common/Header';
+import Layout from '../components/Layout';
+import Header from '../components/Header';
 import SignInForm from '../components/SignInForm';
 import ButtonForm from '../components/ButtonForm';
 
@@ -34,7 +34,7 @@ const FormSection = styled.section`
   align-items: flex-end;
 `;
 
-const login = () => (
+const signin = () => (
   <Layout title="Sign in">
     <Header />
     <Section>
@@ -51,4 +51,4 @@ const login = () => (
   </Layout>
 );
 
-export default login;
+export default signin;

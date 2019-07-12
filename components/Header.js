@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import colors from '../../styles/colors';
+import colors from '../styles/colors';
 
 const Wrapper = styled.section`
   display: flex;
