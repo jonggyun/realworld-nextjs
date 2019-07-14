@@ -96,6 +96,10 @@ Css files cannot be import `_documnet.js`.
 
 ref: https://github.com/zeit/next.js/tree/canary/examples/with-redux-saga
 
+```
+  npm install redux redux-saga react-redux next-redux-saga next-redux-wrapper redux-devtools-extension
+```
+
 # License
 
 MIT
