@@ -92,6 +92,10 @@ Note🚨
 
 Css files cannot be import `_documnet.js`.
 
+### How to use Redux with redux-saga
+
+ref: https://github.com/zeit/next.js/tree/canary/examples/with-redux-saga
+
 # License
 
 MIT
