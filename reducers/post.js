@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 // actions
 export const GET_POSTS_REQUEST = 'post/GET_POSTS_REQUEST';
 export const GET_POSTS_SUCCESS = 'post/GET_POSTS_SUCCESS';
@@ -8,28 +10,25 @@ export const getPostsRequest = () => ({
   type: GET_POSTS_REQUEST,
 });
 
-export const getPostsSuccess = () => ({
-  type: GET_POSTS_SUCCESS,
-});
-
-export const getPostsFailure = () => ({
-  type: GET_POSTS_FAILURE,
-});
-
 // initalState
 const initialState = {
-  posts: [],
+  articles: [],
 };
 
 // reducer
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_POSTS_REQUEST:
-    case GET_POSTS_SUCCESS:
-    case GET_POSTS_FAILURE:
-    default:
-      return state;
-  }
-};
+const reducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case GET_POSTS_REQUEST:
+        break;
+      case GET_POSTS_SUCCESS:
+        draft.articles = action.data.articles;
+        break;
+      case GET_POSTS_FAILURE:
+        break;
+      default:
+        break;
+    }
+  });
 
 export default reducer;

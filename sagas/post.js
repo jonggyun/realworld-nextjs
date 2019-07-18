@@ -1,19 +1,33 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects';
+import axios from 'axios';
 
-import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS } from '../reducers/post';
+import {
+  GET_POSTS_REQUEST,
+  GET_POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
+} from '../reducers/post';
 
-const delay = ms =>
-  new Promise(() => setTimeout(() => console.log('deplay'), ms));
-
-function* getPostsSuccess() {
-  yield call(delay, 500);
-  yield put({ type: GET_POSTS_SUCCESS });
-}
+const ConduitAPI = 'https://conduit.productionready.io/api';
 
 function* getPosts() {
-  yield takeEvery(GET_POSTS_REQUEST, getPostsSuccess);
+  try {
+    const result = yield call(() => axios.get(`${ConduitAPI}/articles`));
+    yield put({
+      type: GET_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_POSTS_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* getPostsRequest() {
+  yield takeEvery(GET_POSTS_REQUEST, getPosts);
 }
 
 export default function* rootSaga() {
-  yield all([getPosts()]);
+  yield all([getPostsRequest()]);
 }

@@ -40,7 +40,7 @@
   },
   "keywords": [],
   "author": "JongGyun Park",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jonggyun/realworld-nextjs/issues"
   },

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -8,8 +8,6 @@ import Layout from '../components/Layout';
 import Header from '../components/Header';
 import SignInForm from '../components/SignInForm';
 import ButtonForm from '../components/ButtonForm';
-
-import { getPostsRequest } from '../reducers/post';
 
 const Section = styled.section`
   margin-top: 1.875rem;
@@ -37,31 +35,24 @@ const FormSection = styled.section`
   align-items: flex-end;
 `;
 
-const signin = ({ postsRequest }) => {
-  useEffect(() => {
-    postsRequest();
-  }, []);
-  return (
-    <Layout title="Sign in">
-      <Header />
-      <Section>
-        <Title>Sign In</Title>
-        <Link href="/signup">
-          <Account>Need an account?</Account>
-        </Link>
-        <FormSection>
-          <SignInForm name="email" placeholder="Email" />
-          <SignInForm name="password" placeholder="Password" />
-          <ButtonForm title="Sign In" />
-        </FormSection>
-      </Section>
-    </Layout>
-  );
-};
+const signin = () => (
+  <Layout title="Sign in">
+    <Header />
+    <Section>
+      <Title>Sign In</Title>
+      <Link href="/signup">
+        <Account>Need an account?</Account>
+      </Link>
+      <FormSection>
+        <SignInForm name="email" placeholder="Email" />
+        <SignInForm name="password" placeholder="Password" />
+        <ButtonForm title="Sign In" />
+      </FormSection>
+    </Section>
+  </Layout>
+);
 
 export default connect(
   null,
-  dispatch => ({
-    postsRequest: () => dispatch(getPostsRequest()),
-  }),
+  null,
 )(signin);
