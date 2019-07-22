@@ -64,6 +64,18 @@ const Description = styled.h3`
   margin-bottom: 1rem;
 `;
 
+const Tags = styled.div`
+  color: ${colors.gray4};
+  font-size: 0.75rem;
+`;
+
+const Tag = styled.span`
+  border: 1px solid ${colors.gray4};
+  border-radius: 0.625rem;
+  padding: 0 0.625rem;
+  margin-right: 0.1875rem;
+`;
+
 const ReadMore = styled.span`
   font-size: 0.8125rem;
   color: ${colors.gray4};
@@ -76,6 +88,7 @@ const PostCard = ({
   title,
   description,
   favoritesCount,
+  tagList,
 }) => (
   <Wrapper>
     <WriteSection>
@@ -88,6 +101,7 @@ const PostCard = ({
     </WriteSection>
     <Title>{title}</Title>
     <Description>{description}</Description>
+    <Tags>{tagList && tagList.map(tag => <Tag key={tag}>{tag}</Tag>)}</Tags>
     <ReadMore>Read more...</ReadMore>
   </Wrapper>
 );
