@@ -26,7 +26,7 @@ const Info = styled.span`
   margin-left: 0.3125rem;
 `;
 
-const UserName = styled.span`
+const Author = styled.span`
   font-size: 1rem;
   color: ${colors.blue4};
 `;
@@ -58,7 +58,7 @@ const Title = styled.h1`
   margin-bottom: 0.1875rem;
 `;
 
-const Preview = styled.h3`
+const Description = styled.h3`
   font-size: 1rem;
   color: ${colors.gray5};
   margin-bottom: 1rem;
@@ -81,13 +81,13 @@ const PostCard = ({
     <WriteSection>
       <UserImage src={image} alt="user-image" />
       <Info>
-        <UserName>{author}</UserName>
+        <Author>{author}</Author>
         <CreateDate>{createdAt}</CreateDate>
       </Info>
       <LikeButton>{`Like ${favoritesCount}`}</LikeButton>
     </WriteSection>
     <Title>{title}</Title>
-    <Preview>{description}</Preview>
+    <Description>{description}</Description>
     <ReadMore>Read more...</ReadMore>
   </Wrapper>
 );
