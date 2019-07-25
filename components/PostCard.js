@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import colors from '../styles/colors';
 
@@ -52,6 +53,12 @@ const LikeButton = styled.button`
   }
 `;
 
+const LinkDiv = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const Title = styled.h1`
   font-size: 1.5rem;
   font-weight: 900;
@@ -99,8 +106,12 @@ const PostCard = ({
       </Info>
       <LikeButton>{`Like ${favoritesCount}`}</LikeButton>
     </WriteSection>
-    <Title>{title}</Title>
-    <Description>{description}</Description>
+    <Link href="/post">
+      <LinkDiv>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </LinkDiv>
+    </Link>
     <Tags>{tagList && tagList.map(tag => <Tag key={tag}>{tag}</Tag>)}</Tags>
     <ReadMore>Read more...</ReadMore>
   </Wrapper>

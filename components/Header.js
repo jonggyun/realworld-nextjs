@@ -20,7 +20,7 @@ const Title = styled.h1`
   }
 `;
 
-const Menulist = styled.ul`
+const MenuList = styled.ul`
   display: flex;
   list-style-type: none;
   color: ${colors.gray5};
@@ -43,7 +43,7 @@ const Header = () => (
       <Title>RealWorld</Title>
     </Link>
     <nav>
-      <Menulist>
+      <MenuList>
         <Link href="/">
           <Menu>Home</Menu>
         </Link>
@@ -53,7 +53,7 @@ const Header = () => (
         <Link href="/signup">
           <Menu>Sign up</Menu>
         </Link>
-      </Menulist>
+      </MenuList>
     </nav>
   </Wrapper>
 );
