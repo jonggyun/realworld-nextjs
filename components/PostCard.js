@@ -96,6 +96,7 @@ const PostCard = ({
   description,
   favoritesCount,
   tagList,
+  slug,
 }) => (
   <Wrapper>
     <WriteSection>
@@ -106,7 +107,7 @@ const PostCard = ({
       </Info>
       <LikeButton>{`Like ${favoritesCount}`}</LikeButton>
     </WriteSection>
-    <Link href="/post">
+    <Link href={`/post?slug=${slug}`}>
       <LinkDiv>
         <Title>{title}</Title>
         <Description>{description}</Description>

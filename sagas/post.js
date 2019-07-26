@@ -5,6 +5,9 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
+  GET_POST_REQUEST,
+  GET_POST_SUCCESS,
+  GET_POST_FAILURE,
 } from '../reducers/post';
 
 const ConduitAPI = 'https://conduit.productionready.io/api';
@@ -28,6 +31,30 @@ function* getPostsRequest() {
   yield takeEvery(GET_POSTS_REQUEST, getPosts);
 }
 
+function* getPost(action) {
+  try {
+    console.log('action.slug!!!!!', action.slug);
+    const result = yield call(
+      () => axios.get(`${ConduitAPI}/articles/${action.slug}`),
+      action.slug,
+    );
+    console.log('result!!!!!!!!!', result);
+    yield put({
+      type: GET_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_POST_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* getPostRequest() {
+  yield takeEvery(GET_POST_REQUEST, getPost);
+}
+
 export default function* rootSaga() {
-  yield all([getPostsRequest()]);
+  yield all([getPostsRequest(), getPostRequest()]);
 }

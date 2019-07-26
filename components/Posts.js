@@ -22,6 +22,7 @@ const Posts = ({ getPosts, posts }) => {
           description={post.description}
           favoritesCount={post.favoritesCount}
           tagList={post.tagList}
+          slug={post.slug}
         />
       ))}
     </React.Fragment>
