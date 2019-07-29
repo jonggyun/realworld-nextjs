@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import Link from 'next/link';
 
 import colors from '../styles/colors';
@@ -30,6 +31,11 @@ const Info = styled.span`
 const Author = styled.span`
   font-size: 1rem;
   color: ${colors.blue4};
+
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 const CreateDate = styled.span`
@@ -83,10 +89,10 @@ const Tag = styled.span`
   margin-right: 0.1875rem;
 `;
 
-const ReadMore = styled.span`
-  font-size: 0.8125rem;
-  color: ${colors.gray4};
-`;
+// const ReadMore = styled.span`
+//   font-size: 0.8125rem;
+//   color: ${colors.gray4};
+// `;
 
 const PostCard = ({
   image,
@@ -102,8 +108,12 @@ const PostCard = ({
     <WriteSection>
       <UserImage src={image} alt="user-image" />
       <Info>
-        <Author>{author}</Author>
-        <CreateDate>{createdAt}</CreateDate>
+        <Link href={`/author?author=${author}`}>
+          <Author>{author}</Author>
+        </Link>
+        <CreateDate>
+          {moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}
+        </CreateDate>
       </Info>
       <LikeButton>{`Like ${favoritesCount}`}</LikeButton>
     </WriteSection>
@@ -114,7 +124,7 @@ const PostCard = ({
       </LinkDiv>
     </Link>
     <Tags>{tagList && tagList.map(tag => <Tag key={tag}>{tag}</Tag>)}</Tags>
-    <ReadMore>Read more...</ReadMore>
+    {/* <ReadMore>Read more...</ReadMore> */}
   </Wrapper>
 );
 

@@ -3,21 +3,20 @@ import { connect } from 'react-redux';
 
 import Layout from '../components/Layout';
 import Header from '../components/Header';
-
 import Post from '../components/Post';
 
 import { getPostRequest } from '../reducers/post';
 
-const post = ({ post }) => (
-  <Layout title={`Post: ${post.title}`}>
+const post = ({ postInfo }) => (
+  <Layout title={`Post: ${postInfo.title}`}>
     <Header />
     <Post
-      title={post.title}
-      author={post.author.username}
-      image={post.author.image}
-      createdAt={post.createdAt}
-      content={post.body}
-      tags={post.tagList}
+      title={postInfo.title}
+      author={postInfo.author.username}
+      image={postInfo.author.image}
+      createdAt={postInfo.createdAt}
+      content={postInfo.body}
+      tags={postInfo.tagList}
     />
   </Layout>
 );
@@ -31,7 +30,7 @@ post.getInitialProps = async ({ query, store, isServer }) => {
 };
 
 const mapStateToProps = state => ({
-  post: state.post.article,
+  postInfo: state.post.article,
 });
 
 const mapDispatchToProps = dispatch => ({

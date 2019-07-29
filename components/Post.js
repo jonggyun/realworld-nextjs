@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import colors from '../styles/colors';
 
@@ -79,7 +80,7 @@ const Post = ({ title, author, image, createdAt, content, tags }) => (
         <UserImage src={image} alt="user_image" />
         <UserInfo>
           <Writer>{author}</Writer>
-          <Date>{createdAt}</Date>
+          <Date>{moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}</Date>
         </UserInfo>
       </Info>
     </TitleSection>
@@ -89,9 +90,6 @@ const Post = ({ title, author, image, createdAt, content, tags }) => (
         {tags.map(tag => (
           <Tag key={`tag_${tag}`}>{tag}</Tag>
         ))}
-        {/* <Tag>tag1</Tag>
-        <Tag>tag2</Tag>
-        <Tag>tag3</Tag> */}
       </Tags>
       <HorizontalLine />
     </ContentSection>
