@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import PostCard from '../components/PostCard';
+import PostCard from './PostCard';
 
 import colors from '../styles/colors';
+
+import { getProfileRequest } from '../reducers/profile';
 
 const Wrapper = styled.section``;
 
@@ -12,15 +15,21 @@ const InfoWrapper = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.25rem 0;
+  padding: 1.875rem 0;
 `;
 
-const AuthorImage = styled.div``;
+const AuthorImage = styled.img`
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 1.875rem;
+  margin-bottom: 0.625rem;
+`;
 
 const AuthorName = styled.h1`
   font-size: 1.5rem;
   font-weight: 900;
   color: #000;
+  margin-bottom: 0.3125rem;
 `;
 
 const AuthorDesc = styled.h3`
@@ -44,23 +53,41 @@ const FollowButton = styled.button`
 
 const PostWrapper = styled.article``;
 
-const AuthorProfile = ({ author }) => (
-  <Wrapper>
-    <InfoWrapper>
-      <AuthorImage>프로필사진</AuthorImage>
-      <AuthorName>유저이름</AuthorName>
-      <AuthorDesc>소개</AuthorDesc>
-      <FollowButton type="submit">Follow</FollowButton>
-    </InfoWrapper>
-    <PostWrapper>
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-    </PostWrapper>
-  </Wrapper>
-);
+const AuthorProfile = ({ author, getProfile, profile }) => {
+  useEffect(() => {
+    getProfile({ username: author });
+  }, []);
+  const { bio, following, image, username } = profile;
 
-export default AuthorProfile;
+  return (
+    <Wrapper>
+      <InfoWrapper>
+        <AuthorImage src={image} alt="user-image" />
+        <AuthorName>{username}</AuthorName>
+        <AuthorDesc>{bio}</AuthorDesc>
+        {following ? null : <FollowButton type="submit">Follow</FollowButton>}
+      </InfoWrapper>
+      <PostWrapper>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+      </PostWrapper>
+    </Wrapper>
+  );
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile.profile,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getProfile: ({ username }) => dispatch(getProfileRequest({ username })),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AuthorProfile);

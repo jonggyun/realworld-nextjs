@@ -33,12 +33,11 @@ function* getPostsRequest() {
 
 function* getPost(action) {
   try {
-    console.log('action.slug!!!!!', action.slug);
     const result = yield call(
       () => axios.get(`${ConduitAPI}/articles/${action.slug}`),
       action.slug,
     );
-    console.log('result!!!!!!!!!', result);
+    console.log('result!!!', result);
     yield put({
       type: GET_POST_SUCCESS,
       data: result.data,
