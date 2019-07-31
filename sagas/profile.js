@@ -9,11 +9,11 @@ import {
 
 const ConduitAPI = 'https://conduit.productionready.io/api';
 
-function* getProfile({ username }) {
+function* getProfile({ author }) {
   try {
     const result = yield call(
-      () => axios.get(`${ConduitAPI}/profiles/${username}`),
-      username,
+      () => axios.get(`${ConduitAPI}/profiles/${author}`),
+      author,
     );
 
     yield put({
