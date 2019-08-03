@@ -63,7 +63,6 @@ function* getPostsByAuthor(action) {
       () => axios.get(`${ConduitAPI}/articles?author=${action.author}`),
       action.author, // ?? 이거 뭐하는 녀석이냐??
     );
-    console.log('result', result.data);
     yield put({
       type: GET_POSTS_BY_AUTHOR_SUCCESS,
       data: result.data,

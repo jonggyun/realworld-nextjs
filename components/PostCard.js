@@ -89,11 +89,6 @@ const Tag = styled.span`
   margin-right: 0.1875rem;
 `;
 
-// const ReadMore = styled.span`
-//   font-size: 0.8125rem;
-//   color: ${colors.gray4};
-// `;
-
 const PostCard = ({
   image,
   author,

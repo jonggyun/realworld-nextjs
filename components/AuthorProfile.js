@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import PostCard from './PostCard';
-import Loading from '../components/common/Loading';
+import Loading from './common/Loading';
 
 import colors from '../styles/colors';
 
@@ -55,20 +55,20 @@ const FollowButton = styled.button`
 
 const PostWrapper = styled.article``;
 
-const AuthorProfile = ({
-  profileLoading,
-  author,
-  getProfile,
-  profile,
-  getPosts,
-  postsLoading,
-  posts,
-}) => {
+const AuthorProfile = ({ author }) => {
+  const profileLoading = useSelector(({ profile }) => profile.loading);
+  const { bio, following, image, username } = useSelector(
+    ({ profile }) => profile.profile,
+  );
+  const postsLoading = useSelector(({ post }) => post.loading);
+  const posts = useSelector(({ post }) => post.articles);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getProfile({ author });
-    getPosts({ author });
+    dispatch(getProfileRequest({ author }));
+    dispatch(getPostByAuthorRequest({ author }));
   }, []);
-  const { bio, following, image, username } = profile;
 
   return (
     <Wrapper>
@@ -85,6 +85,7 @@ const AuthorProfile = ({
           <PostWrapper>
             {posts.map(post => (
               <PostCard
+                key={post.createdAt}
                 image={post.author.image}
                 author={post.author.username}
                 createdAt={post.createdAt}
@@ -104,19 +105,4 @@ const AuthorProfile = ({
   );
 };
 
-const mapStateToProps = state => ({
-  profileLoading: state.profile.loading,
-  profile: state.profile.profile,
-  postsLoading: state.post.loading,
-  posts: state.post.articles,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getProfile: ({ author }) => dispatch(getProfileRequest({ author })),
-  getPosts: ({ author }) => dispatch(getPostByAuthorRequest({ author })),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuthorProfile);
+export default AuthorProfile;

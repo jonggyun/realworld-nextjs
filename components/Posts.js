@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import PostCard from './PostCard';
 
 import { getPostsRequest } from '../reducers/post';
 
-const Posts = ({ getPosts, posts }) => {
+const Posts = () => {
+  const dispatch = useDispatch();
+
+  const posts = useSelector(({ post }) => post.articles);
   useEffect(() => {
-    getPosts();
+    dispatch(getPostsRequest());
   }, []);
 
   return (
@@ -29,19 +32,8 @@ const Posts = ({ getPosts, posts }) => {
   );
 };
 
-Posts.getInitialProps = async ({ store, isServer }) => {
+Posts.getInitialProps = async ({ store }) => {
   store.dispatch(getPostsRequest());
 };
 
-const mapStateToProps = state => ({
-  posts: state.post.articles,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getPosts: () => dispatch(getPostsRequest()),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Posts);
+export default Posts;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Link from 'next/link';
 import styled from 'styled-components';
 import colors from '../styles/colors';
@@ -52,7 +51,4 @@ const signin = () => (
   </Layout>
 );
 
-export default connect(
-  null,
-  null,
-)(signin);
+export default signin;
