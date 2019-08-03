@@ -11,6 +11,9 @@ import {
   GET_POSTS_BY_AUTHOR_REQUEST,
   GET_POSTS_BY_AUTHOR_SUCCESS,
   GET_POSTS_BY_AUTHOR_FAILURE,
+  GET_FAVORITE_POSTS_REQUEST,
+  GET_FAVORITE_POSTS_SUCCESS,
+  GET_FAVORITE_POSTS_FAILURE,
 } from '../reducers/post';
 
 const ConduitAPI = 'https://conduit.productionready.io/api';
@@ -79,6 +82,34 @@ function* getPostsByAuthorRequest() {
   yield takeEvery(GET_POSTS_BY_AUTHOR_REQUEST, getPostsByAuthor);
 }
 
+function* getFavoritePosts({ username }) {
+  try {
+    const result = yield call(
+      () => axios.get(`${ConduitAPI}/articles?favorited=${username}`),
+      username,
+    );
+
+    yield put({
+      type: GET_FAVORITE_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_FAVORITE_POSTS_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* getFavoritePostsRequest() {
+  yield takeEvery(GET_FAVORITE_POSTS_REQUEST, getFavoritePosts);
+}
+
 export default function* rootSaga() {
-  yield all([getPostsRequest(), getPostRequest(), getPostsByAuthorRequest()]);
+  yield all([
+    getPostsRequest(),
+    getPostRequest(),
+    getPostsByAuthorRequest(),
+    getFavoritePostsRequest(),
+  ]);
 }

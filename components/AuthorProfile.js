@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -8,7 +8,10 @@ import Loading from './common/Loading';
 import colors from '../styles/colors';
 
 import { getProfileRequest } from '../reducers/profile';
-import { getPostByAuthorRequest } from '../reducers/post';
+import {
+  getPostByAuthorRequest,
+  getFavoritePostsRequest,
+} from '../reducers/post';
 
 const Wrapper = styled.section``;
 
@@ -18,6 +21,7 @@ const InfoWrapper = styled.article`
   flex-direction: column;
   align-items: center;
   padding: 1.875rem 0;
+  margin-bottom: 1.25rem;
 `;
 
 const AuthorImage = styled.img`
@@ -53,21 +57,52 @@ const FollowButton = styled.button`
   }
 `;
 
+const tabWidth = '20rem';
+
+const Tabs = styled.ul`
+  display: flex;
+  list-style: none;
+  font-size: 1rem;
+  font-weight: bold;
+  width: ${tabWidth};
+  justify-content: center;
+`;
+
+const Tab = styled.li`
+  width: 50%;
+  border-bottom: 1px solid ${colors.gray3};
+  padding: 0.625rem 0;
+  text-align: center;
+`;
+
+const TabBorder = styled.div`
+  border: 2px solid ${colors.blue9};
+  width: calc(${tabWidth} / 2);
+  box-sizing: border-box;
+  transform: ${({ tabIndex }) =>
+    `translateX(${100 * parseInt(tabIndex, 10)}%)`};
+  transition-duration: 0.3s;
+`;
+
 const PostWrapper = styled.article``;
 
 const AuthorProfile = ({ author }) => {
+  const dispatch = useDispatch();
+
   const profileLoading = useSelector(({ profile }) => profile.loading);
   const { bio, following, image, username } = useSelector(
     ({ profile }) => profile.profile,
   );
   const postsLoading = useSelector(({ post }) => post.loading);
   const posts = useSelector(({ post }) => post.articles);
+  const favorites = useSelector(({ post }) => post.favorites);
 
-  const dispatch = useDispatch();
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
     dispatch(getProfileRequest({ author }));
     dispatch(getPostByAuthorRequest({ author }));
+    dispatch(getFavoritePostsRequest({ username: author }));
   }, []);
 
   return (
@@ -82,8 +117,13 @@ const AuthorProfile = ({ author }) => {
               <FollowButton type="submit">Follow</FollowButton>
             )}
           </InfoWrapper>
+          <Tabs>
+            <Tab onClick={() => setTabIndex(0)}>My Articles</Tab>
+            <Tab onClick={() => setTabIndex(1)}>Favorites Articles</Tab>
+          </Tabs>
+          <TabBorder tabIndex={tabIndex} />
           <PostWrapper>
-            {posts.map(post => (
+            {(tabIndex === 0 ? posts : favorites).map(post => (
               <PostCard
                 key={post.createdAt}
                 image={post.author.image}

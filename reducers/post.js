@@ -13,6 +13,10 @@ export const GET_POSTS_BY_AUTHOR_REQUEST = 'post/GET_POST_BY_AUTHOR_REQUEST';
 export const GET_POSTS_BY_AUTHOR_SUCCESS = 'post/GET_POST_BY_AUTHOR_SUCCESS';
 export const GET_POSTS_BY_AUTHOR_FAILURE = 'post/GET_POST_BY_AUTHOR_FAILURE';
 
+export const GET_FAVORITE_POSTS_REQUEST = 'post/GET_FAVORITE_POSTS_REQUEST';
+export const GET_FAVORITE_POSTS_SUCCESS = 'post/GET_FAVORITE_POSTS_SUCCESS';
+export const GET_FAVORITE_POSTS_FAILURE = 'post/GET_FAVORITE_POSTS_FAILURE';
+
 // action creators
 export const getPostsRequest = () => ({
   type: GET_POSTS_REQUEST,
@@ -28,12 +32,18 @@ export const getPostByAuthorRequest = ({ author }) => ({
   author,
 });
 
+export const getFavoritePostsRequest = ({ username }) => ({
+  type: GET_FAVORITE_POSTS_REQUEST,
+  username,
+});
+
 // initialState
 const initialState = {
   loading: true,
   articles: [],
   articlesCount: 0,
   article: {},
+  favorites: [],
 };
 
 // reducer
@@ -69,6 +79,16 @@ const reducer = (state = initialState, action) =>
         draft.loading = false;
         break;
       case GET_POSTS_BY_AUTHOR_FAILURE:
+        draft.loading = false;
+        break;
+      case GET_FAVORITE_POSTS_REQUEST:
+        draft.loading = true;
+        break;
+      case GET_FAVORITE_POSTS_SUCCESS:
+        draft.loading = false;
+        draft.favorites = action.data.articles;
+        break;
+      case GET_FAVORITE_POSTS_FAILURE:
         draft.loading = false;
         break;
     }
