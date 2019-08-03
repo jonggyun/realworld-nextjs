@@ -12,23 +12,23 @@ import { getPostRequest } from '../reducers/post';
 const post = ({ slug }) => {
   const dispatch = useDispatch();
 
-  const { postInfo, loading } = useSelector(state => state.post);
+  const { article, loading } = useSelector(state => state.post);
 
   useEffect(() => {
     dispatch(getPostRequest({ slug }));
   }, []);
 
   return (
-    <Layout title={`Post: ${postInfo.title}`}>
+    <Layout title={`Post: ${article.title}`}>
       <Header />
       {!loading ? (
         <Post
-          title={postInfo.title}
-          author={postInfo.author.username}
-          image={postInfo.author.image}
-          createdAt={postInfo.createdAt}
-          content={postInfo.body}
-          tags={postInfo.tagList}
+          title={article.title}
+          author={article.author.username}
+          image={article.author.image}
+          createdAt={article.createdAt}
+          content={article.body}
+          tags={article.tagList}
         />
       ) : (
         <Loading size={80} />
