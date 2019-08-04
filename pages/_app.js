@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import rootSaga from '../sagas';
 import reducer from '../reducers';
 
@@ -58,6 +61,7 @@ class MyApp extends App {
         <Provider store={store}>
           <GlobalStyle />
           <Component {...pageProps} />
+          <ToastContainer />
         </Provider>
       </Container>
     );

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import colors from '../styles/colors';
-import useInput from '../hooks/useInput';
 
 const Input = styled.input`
   width: 33.75rem;
@@ -18,19 +17,20 @@ const Input = styled.input`
   }
 `;
 
-const SignInForm = ({ placeholder = 'placeholder', name = 'name' }) => {
-  const [state, handleOnChange] = useInput('');
-
-  return (
-    <Input
-      type={name === 'password' ? 'password' : 'text'}
-      name={name}
-      value={state ? state[name] : ''}
-      onChange={handleOnChange}
-      placeholder={placeholder}
-      autoComplete="off"
-    />
-  );
-};
+const SignInForm = ({
+  placeholder = 'placeholder',
+  name = 'name',
+  value = '',
+  handleOnChange,
+}) => (
+  <Input
+    type={name === 'password' ? 'password' : 'text'}
+    name={name}
+    value={value}
+    onChange={handleOnChange}
+    placeholder={placeholder}
+    autoComplete="off"
+  />
+);
 
 export default SignInForm;
