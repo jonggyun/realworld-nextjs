@@ -45,7 +45,6 @@ const signUp = () => {
   const [password, setPassword] = useState('');
 
   const handleOnClick = () => {
-    // console.log('yap', username, email, password);
     dispatch(signUpRequest({ username, email, password }));
   };
 

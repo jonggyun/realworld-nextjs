@@ -12,6 +12,8 @@ import {
   SIGNUP_FAILURE,
 } from '../reducers/auth';
 
+import { errorToastr } from '../lib/utils';
+
 function* login({ email, password }) {
   try {
     const user = { email, password };
@@ -27,9 +29,7 @@ function* login({ email, password }) {
       position: toast.POSITION.TOP_CENTER,
     });
   } catch (e) {
-    toast.error('Check your Email or Password.', {
-      position: toast.POSITION.TOP_CENTER,
-    });
+    yield errorToastr(e.response.data.errors);
     yield put({
       type: LOGIN_FAILURE,
       error: e,
@@ -54,13 +54,10 @@ function* signUp({ username, email, password }) {
       position: toast.POSITION.TOP_CENTER,
     });
   } catch (e) {
-    toast.error('Check your Email or Password.', {
-      position: toast.POSITION.TOP_CENTER,
-    });
-
+    yield errorToastr(e.response.data.errors);
     yield put({
       type: SIGNUP_FAILURE,
-      error: e,
+      error: e.response,
     });
   }
 }
