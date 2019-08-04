@@ -7,7 +7,7 @@ import colors from '../styles/colors';
 
 import Layout from '../components/Layout';
 import Header from '../components/Header';
-import SignInForm from '../components/SignInForm';
+import InputForm from '../components/InputForm';
 import ButtonForm from '../components/ButtonForm';
 
 import { loginRequest } from '../reducers/auth';
@@ -38,7 +38,7 @@ const FormSection = styled.section`
   align-items: flex-end;
 `;
 
-const signin = () => {
+const signIn = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -51,17 +51,17 @@ const signin = () => {
       <Header />
       <Section>
         <Title>Sign In</Title>
-        <Link href="/signup">
+        <Link href="/signUp">
           <Account>Need an account?</Account>
         </Link>
         <FormSection>
-          <SignInForm
+          <InputForm
             name="email"
             placeholder="Email"
             value={email}
             handleOnChange={e => setEmail(e.target.value)}
           />
-          <SignInForm
+          <InputForm
             name="password"
             placeholder="Password"
             value={password}
@@ -74,4 +74,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default signIn;

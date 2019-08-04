@@ -17,7 +17,7 @@ const Input = styled.input`
   }
 `;
 
-const SignInForm = ({
+const InputForm = ({
   placeholder = 'placeholder',
   name = 'name',
   value = '',
@@ -33,4 +33,4 @@ const SignInForm = ({
   />
 );
 
-export default SignInForm;
+export default InputForm;

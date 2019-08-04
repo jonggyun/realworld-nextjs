@@ -47,10 +47,10 @@ const Header = () => (
         <Link href="/">
           <Menu>Home</Menu>
         </Link>
-        <Link href="/signin">
+        <Link href="/signIn">
           <Menu>Sign in</Menu>
         </Link>
-        <Link href="/signup">
+        <Link href="/signUp">
           <Menu>Sign up</Menu>
         </Link>
       </MenuList>
