@@ -1,5 +1,5 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
-import axios from 'axios';
+import ConduitAPI from '../lib/ConduitAPI';
 
 import {
   GET_PROFILE_REQUEST,
@@ -7,12 +7,10 @@ import {
   GET_PROFILE_FAILURE,
 } from '../reducers/profile';
 
-const ConduitAPI = 'https://conduit.productionready.io/api';
-
 function* getProfile({ author }) {
   try {
     const result = yield call(
-      () => axios.get(`${ConduitAPI}/profiles/${author}`),
+      () => ConduitAPI.get(`/profiles/${author}`),
       author,
     );
 

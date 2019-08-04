@@ -1,5 +1,5 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects';
-import axios from 'axios';
+import ConduitAPI from '../lib/ConduitAPI';
 
 import {
   GET_POSTS_REQUEST,
@@ -16,11 +16,10 @@ import {
   GET_FAVORITE_POSTS_FAILURE,
 } from '../reducers/post';
 
-const ConduitAPI = 'https://conduit.productionready.io/api';
-
 function* getPosts() {
   try {
-    const result = yield call(() => axios.get(`${ConduitAPI}/articles`));
+    const result = yield call(() => ConduitAPI.get('/articles'));
+
     yield put({
       type: GET_POSTS_SUCCESS,
       data: result.data,
@@ -40,7 +39,7 @@ function* getPostsRequest() {
 function* getPost(action) {
   try {
     const result = yield call(
-      () => axios.get(`${ConduitAPI}/articles/${action.slug}`),
+      () => ConduitAPI.get(`/articles/${action.slug}`),
       action.slug,
     );
 
@@ -63,7 +62,7 @@ function* getPostRequest() {
 function* getPostsByAuthor(action) {
   try {
     const result = yield call(
-      () => axios.get(`${ConduitAPI}/articles?author=${action.author}`),
+      () => ConduitAPI.get(`/articles?author=${action.author}`),
       action.author, // ?? 이거 뭐하는 녀석이냐??
     );
     yield put({
@@ -85,7 +84,7 @@ function* getPostsByAuthorRequest() {
 function* getFavoritePosts({ username }) {
   try {
     const result = yield call(
-      () => axios.get(`${ConduitAPI}/articles?favorited=${username}`),
+      () => ConduitAPI.get(`/articles?favorited=${username}`),
       username,
     );
 

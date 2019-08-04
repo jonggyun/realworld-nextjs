@@ -1,18 +1,13 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import ConduitAPI from '../lib/ConduitAPI';
 
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../reducers/auth';
-
-const ConduitAPI = 'https://conduit.productionready.io/api';
 
 function* login({ email, password }) {
   try {
     const user = { email, password };
-    const result = yield call(() =>
-      axios.post(`${ConduitAPI}/users/login`, { user }),
-    );
-    console.log('result', result);
+    const result = yield call(() => ConduitAPI.post('/users/login', { user }));
 
     yield put({
       type: LOGIN_SUCCESS,
