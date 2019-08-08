@@ -10,6 +10,7 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
+  LOGOUT,
 } from '../reducers/auth';
 
 import { errorToastr } from '../lib/utils';
@@ -19,13 +20,12 @@ function* login({ email, password }) {
     const user = { email, password };
     const result = yield call(() => ConduitAPI.post('/users/login', { user }));
 
-    // yield localStorage.setItem('jwt', result.data.user.token);
     yield put({
       type: LOGIN_SUCCESS,
-      user: result.data.user,
+      me: result.data.user,
     });
     yield Router.push('/');
-    toast.success('Login Success!!', {
+    toast.success('Login Success', {
       position: toast.POSITION.TOP_CENTER,
     });
   } catch (e) {
@@ -33,6 +33,7 @@ function* login({ email, password }) {
     yield put({
       type: LOGIN_FAILURE,
       error: e,
+      me: null,
     });
   }
 }
@@ -48,7 +49,7 @@ function* signUp({ username, email, password }) {
 
     yield put({
       type: SIGNUP_SUCCESS,
-      user: result.data.user,
+      me: result.data.user,
     });
     toast.success('Sign Up is Success.', {
       position: toast.POSITION.TOP_CENTER,
@@ -66,6 +67,15 @@ function* signUpRequest() {
   yield takeEvery(SIGNUP_REQUEST, signUp);
 }
 
+function* logout() {
+  yield put({
+    type: LOGOUT,
+  });
+  toast.success('Logout Success', {
+    position: toast.POSITION.TOP_CENTER,
+  });
+}
+
 export default function* rootSaga() {
-  yield all([loginRequest(), signUpRequest()]);
+  yield all([loginRequest(), signUpRequest(), logout()]);
 }

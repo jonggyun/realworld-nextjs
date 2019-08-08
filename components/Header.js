@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
+
+import { logout } from '../reducers/auth';
 
 import colors from '../styles/colors';
 
@@ -37,25 +40,38 @@ const Menu = styled.li`
   }
 `;
 
-const Header = () => (
-  <Wrapper>
-    <Link href="/">
-      <Title>RealWorld</Title>
-    </Link>
-    <nav>
-      <MenuList>
-        <Link href="/">
-          <Menu>Home</Menu>
-        </Link>
-        <Link href="/signIn">
-          <Menu>Sign in</Menu>
-        </Link>
-        <Link href="/signUp">
-          <Menu>Sign up</Menu>
-        </Link>
-      </MenuList>
-    </nav>
-  </Wrapper>
-);
+const Header = () => {
+  const dispatch = useDispatch();
+  const me = useSelector(({ auth }) => auth.me);
+
+  const handleOnClickLogout = () => dispatch(logout());
+
+  return (
+    <Wrapper>
+      <Link href="/">
+        <Title>RealWorld</Title>
+      </Link>
+      <nav>
+        <MenuList>
+          <Link href="/">
+            <Menu>Home</Menu>
+          </Link>
+          {me ? (
+            <Menu onClick={handleOnClickLogout}>Sign out</Menu>
+          ) : (
+            <React.Fragment>
+              <Link href="/signIn">
+                <Menu>Sign in</Menu>
+              </Link>
+              <Link href="/signUp">
+                <Menu>Sign up</Menu>
+              </Link>
+            </React.Fragment>
+          )}
+        </MenuList>
+      </nav>
+    </Wrapper>
+  );
+};
 
 export default Header;

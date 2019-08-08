@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
@@ -26,21 +26,15 @@ const SubTitle = styled.h3`
   font-size: 1rem;
 `;
 
-const Index = () => {
-  useEffect(() => {
-    console.log('index');
-  });
-
-  return (
-    <Layout>
-      <Header />
-      <MainSection>
-        <Title>Welcome to RealWorld</Title>
-        <SubTitle>Personal Project made by Next.js</SubTitle>
-      </MainSection>
-      <Posts />
-    </Layout>
-  );
-};
+const Index = () => (
+  <Layout>
+    <Header />
+    <MainSection>
+      <Title>Welcome to RealWorld</Title>
+      <SubTitle>Personal Project made by Next.js</SubTitle>
+    </MainSection>
+    <Posts />
+  </Layout>
+);
 
 export default Index;
