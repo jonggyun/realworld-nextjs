@@ -8,7 +8,9 @@ export const SIGNUP_REQUEST = 'auth/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'auth/SIGNUP_FAILURE';
 
-export const LOGOUT = 'auth/LOGOUT';
+export const LOGOUT_REQUSET = 'auth/LOGOUT_REQUSET';
+export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'auth/LOGOUT_FAILURE';
 
 export const loginRequest = ({ email, password }) => ({
   type: LOGIN_REQUEST,
@@ -16,8 +18,8 @@ export const loginRequest = ({ email, password }) => ({
   password,
 });
 
-export const logout = () => ({
-  type: LOGOUT,
+export const logoutRequest = () => ({
+  type: LOGOUT_REQUSET,
 });
 
 export const signUpRequest = ({ username, email, password }) => ({
@@ -49,7 +51,10 @@ const reducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = action.error;
         break;
-      case LOGOUT:
+      case LOGOUT_REQUSET:
+      case LOGOUT_FAILURE:
+        break;
+      case LOGOUT_SUCCESS:
         draft.me = null;
         break;
       case SIGNUP_REQUEST:

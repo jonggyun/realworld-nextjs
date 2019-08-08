@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { logout } from '../reducers/auth';
+import { logoutRequest } from '../reducers/auth';
 
 import colors from '../styles/colors';
 
@@ -44,7 +44,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const me = useSelector(({ auth }) => auth.me);
 
-  const handleOnClickLogout = () => dispatch(logout());
+  const handleOnClickLogout = () => {
+    dispatch(logoutRequest());
+  };
 
   return (
     <Wrapper>

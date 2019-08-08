@@ -1,4 +1,4 @@
-import { takeEvery, all, call, put } from 'redux-saga/effects';
+import { takeEvery, all, call, put, fork } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import Router from 'next/router';
 import ConduitAPI from '../lib/ConduitAPI';
@@ -10,7 +10,9 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  LOGOUT,
+  LOGOUT_REQUSET,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from '../reducers/auth';
 
 import { errorToastr } from '../lib/utils';
@@ -68,14 +70,26 @@ function* signUpRequest() {
 }
 
 function* logout() {
-  yield put({
-    type: LOGOUT,
-  });
-  toast.success('Logout Success', {
-    position: toast.POSITION.TOP_CENTER,
-  });
+  try {
+    yield put({
+      type: LOGOUT_SUCCESS,
+      me: null,
+    });
+    toast.success('Logout Success.', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (e) {
+    yield put({
+      type: LOGOUT_FAILURE,
+      error: e.response,
+    });
+  }
+}
+
+function* logoutReqeust() {
+  yield takeEvery(LOGOUT_REQUSET, logout);
 }
 
 export default function* rootSaga() {
-  yield all([loginRequest(), signUpRequest(), logout()]);
+  yield all([fork(loginRequest), fork(signUpRequest), fork(logoutReqeust)]);
 }
