@@ -46,6 +46,14 @@ const signIn = () => {
   const handleOnClick = () => {
     dispatch(loginRequest({ email, password }));
   };
+
+  const handleOnChange = e => {
+    const { name, value } = e.target;
+
+    if (name === 'email') setEmail(value);
+    if (name === 'password') setPassword(value);
+  };
+
   return (
     <Layout title="Sign in">
       <Header />
@@ -59,13 +67,13 @@ const signIn = () => {
             name="email"
             placeholder="Email"
             value={email}
-            handleOnChange={e => setEmail(e.target.value)}
+            handleOnChange={handleOnChange}
           />
           <InputForm
             name="password"
             placeholder="Password"
             value={password}
-            handleOnChange={e => setPassword(e.target.value)}
+            handleOnChange={handleOnChange}
           />
           <ButtonForm title="Sign In" handleOnClick={handleOnClick} />
         </FormSection>

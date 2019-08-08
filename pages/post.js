@@ -37,11 +37,10 @@ const post = ({ slug }) => {
   );
 };
 
-post.getInitialProps = async ({ query, store, isServer }) => {
+post.getInitialProps = async ({ query, store }) => {
   const { slug } = query;
 
   store.dispatch(getPostRequest({ slug }));
-
   return { slug };
 };
 
