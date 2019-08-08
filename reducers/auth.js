@@ -22,6 +22,7 @@ export const signUpRequest = ({ username, email, password }) => ({
 });
 
 const initialState = {
+  // isLoggedIn: localStorage.getItem('jwt') === true,
   loading: true,
   email: '',
   error: null,

@@ -19,7 +19,7 @@ function* login({ email, password }) {
     const user = { email, password };
     const result = yield call(() => ConduitAPI.post('/users/login', { user }));
 
-    yield window.localStorage.setItem('jwt', result.data.user.token);
+    // yield localStorage.setItem('jwt', result.data.user.token);
     yield put({
       type: LOGIN_SUCCESS,
       user: result.data.user,
