@@ -12,6 +12,10 @@ const Wrapper = styled.ul`
   border-bottom: 1px solid ${colors.gray3};
   font-size: 0.875rem;
   font-weight: 900;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Tab = styled.li`

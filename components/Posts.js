@@ -4,24 +4,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostCard from './PostCard';
 import Tabs from './common/Tabs';
 
-import { getPostsRequest } from '../reducers/post';
+import { getPostsRequest, getPostByAuthorRequest } from '../reducers/post';
 
 const Posts = () => {
   const dispatch = useDispatch();
   const [tabIndex, setTabIndex] = useState(0);
 
-  const posts = useSelector(({ post }) => post.articles);
+  const { articles: posts } = useSelector(({ post }) => post);
+  const { me } = useSelector(({ auth }) => auth);
+
   useEffect(() => {
-    dispatch(getPostsRequest());
-  }, []);
+    if (tabIndex === 0) {
+      dispatch(getPostByAuthorRequest({ author: me.username }));
+    }
+    if (tabIndex !== 0 && me != null) {
+      dispatch(getPostsRequest());
+    }
+  }, [tabIndex]);
 
   return (
     <React.Fragment>
-      <Tabs
-        tabs={[{ name: 'Your Feed' }, { name: 'Global Feed' }]}
-        tabIndex={tabIndex}
-        handleOnClick={setTabIndex}
-      />
+      {me ? (
+        <Tabs
+          tabs={[{ name: 'Your Feed' }, { name: 'Global Feed' }]}
+          tabIndex={tabIndex}
+          handleOnClick={setTabIndex}
+        />
+      ) : null}
       {posts.map(post => (
         <PostCard
           key={post.slug}
