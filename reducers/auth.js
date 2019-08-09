@@ -52,10 +52,14 @@ const reducer = (state = initialState, action) =>
         draft.error = action.error;
         break;
       case LOGOUT_REQUSET:
-      case LOGOUT_FAILURE:
+        draft.loading = true;
         break;
       case LOGOUT_SUCCESS:
+        draft.loading = false;
         draft.me = null;
+        break;
+      case LOGOUT_FAILURE:
+        draft.loading = false;
         break;
       case SIGNUP_REQUEST:
         draft.loading = true;

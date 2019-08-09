@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import PostCard from './PostCard';
+import Tabs from './common/Tabs';
 
 import { getPostsRequest } from '../reducers/post';
 
 const Posts = () => {
   const dispatch = useDispatch();
+  const [tabIndex, setTabIndex] = useState(0);
 
   const posts = useSelector(({ post }) => post.articles);
   useEffect(() => {
@@ -15,6 +17,11 @@ const Posts = () => {
 
   return (
     <React.Fragment>
+      <Tabs
+        tabs={[{ name: 'Your Feed' }, { name: 'Global Feed' }]}
+        tabIndex={tabIndex}
+        handleOnClick={setTabIndex}
+      />
       {posts.map(post => (
         <PostCard
           key={post.slug}

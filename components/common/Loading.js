@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const Wrapper = styled.section`
   width: ${({ width }) => (width ? `${width}px` : '100vw')};
@@ -7,6 +7,13 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${({ isAbsolute }) =>
+    isAbsolute
+      ? css`
+          position: absolute;
+        `
+      : null};
 `;
 
 /* To use rotated Image in component */
@@ -22,18 +29,12 @@ const LoadingImage = styled.img`
   animation: ${rotate} 1.5s linear infinite;
 `;
 
-const Loading = ({ size, width, height }) => {
+const Loading = ({ size, width, height, isAbsolute }) => {
   const imageSrc = '/static/loading.png';
 
   return (
-    <Wrapper>
-      <LoadingImage
-        src={imageSrc}
-        width={width}
-        height={height}
-        size={size}
-        alt="loading-image"
-      />
+    <Wrapper isAbsolute={isAbsolute} width={width} height={height}>
+      <LoadingImage src={imageSrc} size={size} alt="loading-image" />
     </Wrapper>
   );
 };

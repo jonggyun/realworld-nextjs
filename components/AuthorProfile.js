@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import PostCard from './PostCard';
 import Loading from './common/Loading';
+import Tabs from './common/Tabs';
 
 import colors from '../styles/colors';
 
@@ -57,33 +58,6 @@ const FollowButton = styled.button`
   }
 `;
 
-const tabWidth = '20rem';
-
-const Tabs = styled.ul`
-  display: flex;
-  list-style: none;
-  font-size: 1rem;
-  font-weight: bold;
-  width: ${tabWidth};
-  justify-content: center;
-`;
-
-const Tab = styled.li`
-  width: 50%;
-  border-bottom: 1px solid ${colors.gray3};
-  padding: 0.625rem 0;
-  text-align: center;
-`;
-
-const TabBorder = styled.div`
-  border: 2px solid ${colors.blue9};
-  width: calc(${tabWidth} / 2);
-  box-sizing: border-box;
-  transform: ${({ tabIndex }) =>
-    `translateX(${100 * parseInt(tabIndex, 10)}%)`};
-  transition-duration: 0.3s;
-`;
-
 const PostWrapper = styled.article``;
 
 const AuthorProfile = ({ author }) => {
@@ -117,11 +91,11 @@ const AuthorProfile = ({ author }) => {
               <FollowButton type="submit">Follow</FollowButton>
             )}
           </InfoWrapper>
-          <Tabs>
-            <Tab onClick={() => setTabIndex(0)}>My Articles</Tab>
-            <Tab onClick={() => setTabIndex(1)}>Favorites Articles</Tab>
-          </Tabs>
-          <TabBorder tabIndex={tabIndex} />
+          <Tabs
+            tabs={[{ name: 'My Articles' }, { name: 'Favorites Articles' }]}
+            tabIndex={tabIndex}
+            handleOnClick={setTabIndex}
+          />
           <PostWrapper>
             {(tabIndex === 0 ? posts : favorites).map(post => (
               <PostCard

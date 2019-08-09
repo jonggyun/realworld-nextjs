@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import colors from '../styles/colors';
@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 import Header from '../components/Header';
 import InputForm from '../components/InputForm';
 import ButtonForm from '../components/ButtonForm';
+import Loading from '../components/common/Loading';
 
 import { loginRequest } from '../reducers/auth';
 
@@ -17,6 +18,8 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -40,6 +43,7 @@ const FormSection = styled.section`
 
 const signIn = () => {
   const dispatch = useDispatch();
+  const { loading } = useSelector(({ auth }) => auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -58,6 +62,7 @@ const signIn = () => {
     <Layout title="Sign in">
       <Header />
       <Section>
+        {loading ? <Loading size={60} height={400} isAbsolute /> : null}
         <Title>Sign In</Title>
         <Link href="/signUp">
           <Account>Need an account?</Account>
