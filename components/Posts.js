@@ -15,10 +15,10 @@ const Posts = () => {
 
   useEffect(() => {
     if (tabIndex === 0) {
-      dispatch(getPostByAuthorRequest({ author: me.username }));
+      dispatch(getPostsRequest());
     }
     if (tabIndex !== 0 && me != null) {
-      dispatch(getPostsRequest());
+      dispatch(getPostByAuthorRequest({ author: me.username }));
     }
   }, [tabIndex]);
 
@@ -26,7 +26,7 @@ const Posts = () => {
     <React.Fragment>
       {me ? (
         <Tabs
-          tabs={[{ name: 'Your Feed' }, { name: 'Global Feed' }]}
+          tabs={[{ name: 'Global Feed' }, { name: 'Your Feed' }]}
           tabIndex={tabIndex}
           handleOnClick={setTabIndex}
         />
